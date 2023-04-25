@@ -1,0 +1,53 @@
+<h1> Director #<%= @the_director.id%> details </h1>
+
+<a href = "/directors"> Go back </a>
+
+<hr>
+
+<dl>
+  <dt>Name</dt>
+  <dd> <%= @the_director.name %> </dd>
+
+  <dt>Dob</dt>
+  <dd> <%= @the_director.dob %> </dd>
+
+  <dt>Bio</dt>
+  <dd> <%= @the_director.bio %> </dd>
+
+  <dt>Image</dt>
+  <dd> <img src="<%= @the_director.image %>"></img> </dd>
+
+  <dt>Created at</dt>
+  <dd><%= time_ago_in_words(@the_director.created_at) %></dd>
+
+  <dt>Updated at</dt>
+  <dd><%= time_ago_in_words(@the_director.updated_at) %></dd>
+</dl>
+
+<hr>
+
+<h1> Filmography </h1>
+
+<table border = "1">
+<tr>
+  <th>ID</th>
+  <th>Image</th>
+  <th>Title</th>
+  <th>Year</th>
+  <th>Director</th>
+  <th></th>
+</tr>
+
+<% @dir_movies.each do |item| %>
+<% movie_dir = @dir_table.where({ :id => item.director_id }).at(0) %>
+<tr>
+  <td><%= item.id %></td>
+  <td><img src = "<%= item.image %>"></img> </td>
+  <td><%= item.title %></td>
+  <td><%= item.year %></td>
+  <td><%= movie_dir.name %></td>
+  <td><a href = "/movies/<%=item.id%>">Show details</td>
+</tr>
+<% end %>
+
+</table>
